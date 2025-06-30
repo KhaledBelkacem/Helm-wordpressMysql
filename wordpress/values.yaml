@@ -1,0 +1,36 @@
+replicaCount: 1
+
+image:
+  repository: wordpress
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+
+wordpressUsername: admin
+wordpressPassword: admin123
+wordpressEmail: admin@example.com
+wordpressBlogName: "My WordPress Blog"
+wordpressTablePrefix: wp_
+
+mysql:
+  host: mysql
+  user: wpuser
+  password: wppass
+  database: wordpress
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # Add your TLS/SSL annotations here if needed
+  hosts:
+    - host: wordpress.local
+      paths:
+        - /
+  tls:
+    - secretName: wordpress-local-tls
+      hosts:
+        - wordpress.local

@@ -1,0 +1,17 @@
+mysqlRootPassword: rootpass
+mysqlUser: wpuser
+mysqlPassword: wppass
+mysqlDatabase: wordpress
+
+image:
+  repository: mysql
+  tag: "5.7"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3306
+
+persistence:
+  enabled: true
+  size: 1Gi
